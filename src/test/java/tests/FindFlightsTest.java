@@ -2,6 +2,8 @@ package tests;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -16,6 +18,8 @@ import pages.SummaryPage;
 
 @Listeners(common.ScreenCaptureOnFailure.class)
 public class FindFlightsTest {
+	Logger log = Logger.getLogger("userwrittenlog");
+	
 	private String START_URL = "http://www.volotea.com/en";
 	public FindFlightsPage findFlightsPage;
 	public SummaryPage summaryPage;
@@ -33,6 +37,7 @@ public class FindFlightsTest {
 
 	@Test
 	public void applicationPage() throws Exception {
+		log.info("Opening Landing Page or Homepage");
 		String attributeValue = findFlightsPage.verifyLandingPage();
 		if (attributeValue.contains("FIND FLIGHTS")) {
 			assertTrue(true);
@@ -43,6 +48,7 @@ public class FindFlightsTest {
 	@Parameters({ "originCountry", "originState", "destinationCountry", "destinationState" })
 	public void selectOriginDestinationStateAndCountry(String originCountry, String originState,
 			String destinationCountry, String destinationState) throws Exception {
+		log.info("Selecting Origin Coutry");		
 		findFlightsPage.selectOriginAndDestinationState(originCountry, originState, destinationCountry,
 				destinationState);
 	}
